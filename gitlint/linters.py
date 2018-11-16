@@ -93,7 +93,7 @@ def lint_command(name, program, arguments, filter_regex, filename, lines):
         output = output.decode('utf-8')
         utils.save_output_in_cache(name, filename, output)
 
-    output_lines = output.split(os.linesep)
+    output_lines = output.splitlines()
 
     if lines is None:
         lines_regex = r'\d+'

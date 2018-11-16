@@ -72,7 +72,7 @@ def modified_files(root, tracked_only=False, commit=None):
     status_lines = subprocess.check_output([
         'git', 'status', '--porcelain', '--untracked-files=all',
         '--ignore-submodules=all'
-    ]).decode('utf-8').split(os.linesep)
+    ]).decode('utf-8').splitlines()
 
     modes = ['M ', ' M', 'A ', 'AM', 'MM']
     if not tracked_only:
@@ -93,7 +93,7 @@ def _modified_files_with_commit(root, commit):
     status_lines = subprocess.check_output([
         'git', 'diff-tree', '-r', '--root', '--no-commit-id', '--name-status',
         commit
-    ]).decode('utf-8').split(os.linesep)
+    ]).decode('utf-8').splitlines()
 
     modified_file_status = utils.filter_lines(
         status_lines,
@@ -132,8 +132,7 @@ def modified_lines(filename, extra_data, commit=None):
 
     # Split as bytes, as the output may have some non unicode characters.
     blame_lines = subprocess.check_output(
-        ['git', 'blame', '--porcelain', filename]).split(
-            os.linesep.encode('utf-8'))
+        ['git', 'blame', '--porcelain', filename]).splitlines()
     modified_line_numbers = utils.filter_lines(
         blame_lines, commit + br' (?P<line>\d+) (\d+)', groups=('line', ))
 

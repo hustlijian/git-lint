@@ -50,6 +50,8 @@ from concurrent import futures
 
 import docopt
 import termcolor
+import colorama
+colorama.init()
 import yaml
 
 import gitlint.git as git

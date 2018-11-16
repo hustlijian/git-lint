@@ -62,8 +62,7 @@ def modified_files(root, tracked_only=False, commit=None):
         command.append('--change=%s' % commit)
 
     # Convert to unicode and split
-    status_lines = subprocess.check_output(command).decode('utf-8').split(
-        os.linesep)
+    status_lines = subprocess.check_output(command).decode('utf-8').splitlines()
 
     modes = ['M', 'A']
     if not tracked_only:
@@ -105,8 +104,7 @@ def modified_lines(filename, extra_data, commit=None):
     command.append(filename)
 
     # Split as bytes, as the output may have some non unicode characters.
-    diff_lines = subprocess.check_output(command).split(
-        os.linesep.encode('utf-8'))
+    diff_lines = subprocess.check_output(command).splitlines()
     diff_line_numbers = utils.filter_lines(
         diff_lines,
         br'@@ -\d+,\d+ \+(?P<start_line>\d+),(?P<lines>\d+) @@',

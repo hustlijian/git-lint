@@ -19,6 +19,7 @@ import re
 
 # This can be just pathlib when 2.7 and 3.4 support is dropped.
 import pathlib2 as pathlib
+from shutil import which
 
 
 def filter_lines(lines, filter_regex, groups=None):
@@ -43,22 +44,6 @@ def filter_lines(lines, filter_regex, groups=None):
                 yield tuple(matched_groups.get(group) for group in groups)
 
 
-# TODO(skreft): add test
-def which(program):
-    """Returns a list of paths where the program is found."""
-    if (os.path.isabs(program) and os.path.isfile(program)
-            and os.access(program, os.X_OK)):
-        return [program]
-
-    candidates = []
-    locations = os.environ.get("PATH").split(os.pathsep)
-    for location in locations:
-        candidate = os.path.join(location, program)
-        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
-            candidates.append(candidate)
-    return candidates
-
-
 def programs_not_in_path(programs):
     """Returns all the programs that are not found in the PATH."""
     return [program for program in programs if not which(program)]
@@ -75,6 +60,7 @@ def _open_for_write(filename):
 def _get_cache_filename(name, filename):
     """Returns the cache location for filename and linter name."""
     filename = os.path.abspath(filename)[1:]
+	filename = filename.lstrip(":\\")  # for windows
     home_folder = os.path.expanduser('~')
     base_cache_dir = os.path.join(home_folder, '.git-lint', 'cache')
 
