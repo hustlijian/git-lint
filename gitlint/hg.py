@@ -62,7 +62,8 @@ def modified_files(root, tracked_only=False, commit=None):
         command.append('--change=%s' % commit)
 
     # Convert to unicode and split
-    status_lines = subprocess.check_output(command).decode('utf-8').splitlines()
+    status_lines = subprocess.check_output(command).decode(
+        'utf-8').splitlines()
 
     modes = ['M', 'A']
     if not tracked_only:
