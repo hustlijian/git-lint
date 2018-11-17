@@ -151,4 +151,4 @@ class UtilsTest(fake_filesystem_unittest.TestCase):
         self.fs.create_file(filename)
         os.chmod(filename, 0o755)
 
-        self.assertEqual([filename], utils.which(filename))
+        self.assertEqual(filename, utils.which(filename))
