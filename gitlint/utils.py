@@ -75,12 +75,12 @@ def which(cmd, mode=os.F_OK | os.X_OK, path=None):
         files = [cmd]
 
     seen = set()
-    for dir in path:
-        normdir = os.path.normcase(dir)
-        if normdir not in seen:
+    for dirname in path:
+        normdir = os.path.normcase(dirname)
+        if not normdir in seen:
             seen.add(normdir)
             for thefile in files:
-                name = os.path.join(dir, thefile)
+                name = os.path.join(dirname, thefile)
                 if _access_check(name, mode):
                     return name
     return None
@@ -122,8 +122,9 @@ def _open_for_write(filename):
 
 def _get_cache_filename(name, filename):
     """Returns the cache location for filename and linter name."""
-    filename = os.path.abspath(filename)[1:]
-    filename = filename.lstrip(":\\")  # for windows
+    filename = os.path.abspath(filename)
+    filename = os.path.splitdrive(filename)[1]
+    filename = filename.lstrip(os.path.sep)
     home_folder = os.path.expanduser('~')
     base_cache_dir = os.path.join(home_folder, '.git-lint', 'cache')
 
