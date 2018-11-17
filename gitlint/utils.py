@@ -55,6 +55,7 @@ def which(cmd, mode=os.F_OK | os.X_OK, path=None):
         return None
     path = path.split(os.pathsep)
 
+    import sys
     if sys.platform == "win32":
         # The current directory takes precedence on Windows.
         if os.curdir not in path:
