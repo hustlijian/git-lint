@@ -13,7 +13,6 @@ cache: pip
 install:
   - pip install .[dev,test] coveralls
   - bash scripts/install-linters.sh
-  - pip install -r requirements-dev.txt 
 # command to run tests
 before_script:
   - export PATH=$PATH:/tmp/pmd-bin/bin:/usr/local/bin
