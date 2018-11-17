@@ -16,7 +16,6 @@
 import io
 import os
 import re
-import sys
 
 # This can be just pathlib when 2.7 and 3.4 support is dropped.
 import pathlib2 as pathlib
