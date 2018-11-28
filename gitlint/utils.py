@@ -18,8 +18,17 @@ import os
 import re
 
 # This can be just pathlib when 2.7 and 3.4 support is dropped.
-import pathlib2 as pathlib
-
+# https://github.com/jmcgeheeiv/pyfakefs/pull/422
+try:
+    import pathlib
+    pathlib2 = None
+except ImportError:
+    try:
+        import pathlib2
+        pathlib = pathlib2
+    except ImportError:
+        pathlib = None
+        pathlib2 = None
 
 # copy from python3, shutil.which
 def which(cmd, mode=os.F_OK | os.X_OK, path=None):
