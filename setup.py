@@ -52,10 +52,10 @@ setup(
     install_requires=[
         'docopt',
         'pyyaml',
-        'pathlib2',
+        'pathlib2;python_version<="3.4"',
         'termcolor',
         'colorama;platform_system=="Windows"',
-        'backports.shutil_which;python_verion<"3.4"',
+        'backports.shutil_which;python_version<"3.4"',
         # Packages specific to linters. They are optional, but to ease the use
         # we prefer to put them here.
         'docutils',
