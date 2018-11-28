@@ -1,7 +1,0 @@
-termcolor
-colorama
-nose
-docopt
-pyfakefs
-pyyaml
-pathlib2
