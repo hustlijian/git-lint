@@ -24,7 +24,6 @@ if sys.version_info <= (3, 4):
 else:
     import pathlib
 
-
 try:
     from shutil import which
 except ImportError:
