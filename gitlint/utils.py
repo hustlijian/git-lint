@@ -19,7 +19,6 @@ import re
 import sys
 
 # This can be just pathlib when 2.7 and 3.4 support is dropped.
-# https://github.com/jmcgeheeiv/pyfakefs/pull/422
 if sys.version_info <= (3, 4):
     import pathlib2 as pathlib
 else:
